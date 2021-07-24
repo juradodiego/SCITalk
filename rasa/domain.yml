@@ -1,0 +1,318 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- ask_about_cases_before
+- ask_about_cases_since
+- ask_about_cases_before_specific
+- ask_about_cases_since_specific
+- ask_about_case_count_by_time_day
+- ask_about_case_count_by_time_month
+- ask_about_case_count
+- ask_about_case_count_on_day
+- greet
+- ask_about_case_summary_graph
+- bot_challenge
+- goodbye
+- affirm
+- deny
+- thankyou
+- how_are_you
+- mood_great
+- mood_unhappy
+- out_of_scope
+- inform_scope
+- inform_case_type
+- inform_countries
+- clear_chat
+- start_over
+- ask_purpose
+- ask_about_first_day
+- be_mean
+- positive_statement
+entities:
+- byday
+- bysubtime
+- bytime
+- case_type
+- countries
+- country
+- name
+- scope
+slots:
+  byday:
+    type: categorical
+    influence_conversation: true
+    values:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - '8'
+    - '9'
+    - '10'
+    - '11'
+    - '12'
+    - '13'
+    - '14'
+    - '15'
+    - '16'
+    - '17'
+    - '18'
+    - '19'
+    - '20'
+    - '21'
+    - '22'
+    - '23'
+    - '24'
+    - '25'
+    - '26'
+    - '27'
+    - '28'
+    - '29'
+    - '30'
+    - '31'
+    - one
+    - two
+    - three
+    - four
+    - five
+    - six
+    - seven
+    - eight
+    - nine
+    - ten
+    - eleven
+    - twelve
+    - thirteen
+    - fourteen
+    - fifteen
+    - sixteen
+    - seventeen
+    - eightteen
+    - nineteen
+    - twenty
+    - twenty one
+    - twenty two
+    - twenty three
+    - twenty four
+    - twenty five
+    - twenty six
+    - twenty seven
+    - twenty eight
+    - twenty nine
+    - thirty
+    - thirty one
+    - first
+    - second
+    - third
+    - fourth
+    - fifth
+    - sixth
+    - seventh
+    - eighth
+    - ninth
+    - tenth
+    - eleventh
+    - twelfth
+    - thirteenth
+    - fourteenth
+    - fifteenth
+    - sixteenth
+    - seventeenth
+    - eighteenth
+    - nineteenth
+    - twentieth
+    - twenty first
+    - twenty second
+    - twenty third
+    - twenty fourth
+    - twenty fifth
+    - twenty sixth
+    - twenty seventh
+    - twenty eighth
+    - twenty ninth
+    - thirtieth
+    - thirty first
+    - twenty-one
+    - twenty-two
+    - twenty-three
+    - twenty-four
+    - twenty-five
+    - twenty-six
+    - twenty-seven
+    - twenty-eight
+    - twenty-nine
+    - thirty-one
+    - twenty-first
+    - twenty-second
+    - twenty-third
+    - twenty-fourth
+    - twenty-fifth
+    - twenty-sixth
+    - twenty-seventh
+    - twenty-eighth
+    - twenty-ninth
+    - thirty-first
+    - __other__
+  bysubtime:
+    type: categorical
+    influence_conversation: true
+    values:
+    - january
+    - february
+    - march
+    - april
+    - may
+    - june
+    - july
+    - august
+    - september
+    - october
+    - november
+    - december
+    - __other__
+  bytime:
+    type: categorical
+    influence_conversation: true
+    values:
+    - day
+    - month
+    - __other__
+  case_type:
+    type: categorical
+    influence_conversation: false
+    values:
+    - recovered
+    - confirmed
+    - deaths
+    - __other__
+  count:
+    type: text
+    auto_fill: false
+    influence_conversation: false
+  countries:
+    type: list
+    influence_conversation: true
+  countries_text:
+    type: text
+    influence_conversation: false
+  requested_slot:
+    type: text
+    influence_conversation: false
+  scope:
+    type: categorical
+    influence_conversation: false
+    values:
+    - new
+    - total
+    - __other__
+  use_global:
+    type: bool
+    influence_conversation: false
+
+  # contextual slots
+  action_performed:
+    type: bool
+    initial_value: false
+
+responses:
+  utter_greet:
+  - text: Hey!
+  - text: Hello!
+  - text: Hi!
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_welcome:
+  - text: You're welcome!
+  - text: It's my pleasure!
+  - text: Glad I could help!
+  - text: Of course.
+  - text: :)
+  utter_goodbye:
+  - text: Bye
+  - text: Goodbye!
+  - text: Hasta la vista, baby!
+  utter_what_else:
+  - text: Is there anything else I can help you with?
+  utter_how_can_i_help:
+  - text: So, how can I help?
+  - text: What can I do for you?
+  - text: How may I assist you?
+  - text: So, is there anything I can help with?
+  utter_mood_good:
+  - text: I'm great, thanks!
+  - text: I'm good!
+  - text: Just fine!
+  - text: Feeling great!
+  utter_sorry:
+  - text: I'm sorry, I didn't understand that.
+  utter_searching:
+  - text: Okay, let me look that up...
+  - text: Got it. I'll get that data.
+  utter_iamabot:
+  - text: I am SCITalk, a conversational AI built by students at Pitt.
+  utter_ask_scope:
+  - text: New or total cases?
+  utter_ask_case_type:
+  - text: Would you like data about recovered cases, confirmed cases, or deaths?
+  utter_ask_use_global:
+  - text: Would you like global data, or data for specific countries?
+  utter_ask_countries_text:
+  - text: Which countries would you like information about?
+  utter_inform_purpose:
+  - text: I'm a conversational dialogue system powered by machine learning that's capable of answering a wide variety of your questions about COVID-19.
+  utter_be_nice:
+  - text: Please be nice :)
+  utter_what_action:
+  - text: What would you like me to do with this information?
+actions:
+- action_case_count
+- action_case_count_before
+- action_case_count_before_specific
+- action_case_count_by_time_day
+- action_case_count_by_time_month
+- action_case_count_since
+- action_case_count_since_specific
+- action_case_count_on_day
+- action_case_summary_graph
+- action_clear_chat
+- action_forget_slots
+- action_reset_bot
+- get_first_day
+- utter_greet
+- utter_iamabot
+- validate_case_count_form
+forms:
+  case_count_form:
+    scope:
+    - type: from_entity
+      entity: scope
+    case_type:
+    - type: from_entity
+      entity: case_type
+    use_global:
+    - type: from_entity
+      entity: countries
+      value: false
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+    countries_text:
+    - type: from_entity
+      entity: countries
+      value: example
+    - type: from_text
+      not_intent: out_of_scope
+version: '2.0'

@@ -1,0 +1,827 @@
+version: "2.0"
+
+stories:
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: ask_purpose
+  - action: utter_inform_purpose
+
+- story: chitchat_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: positive_statement
+  - action: utter_how_can_i_help
+
+- story: chitchat_2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: ask_purpose
+  - action: utter_inform_purpose
+
+- story: chitchat_3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: be_mean
+  - action: utter_be_nice
+
+- story: goodbye_story
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: positive_statement
+  - action: utter_how_can_i_help
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: be_mean
+  - action: utter_be_nice
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_forget_slots
+
+- story: case_count_form_happy_path_1
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_happy_path_2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_happy_path_3
+  steps:
+  - intent: ask_purpose
+  - action: utter_inform_purpose
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: inform_countries
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_happy_path_4
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: inform_scope
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_happy_path_5
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: inform_case_type
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_happy_path_6
+  steps:
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: inform_countries
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: case_count_form_stop
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: ask_about_case_count
+  - action: case_count_form
+  - active_loop: case_count_form
+  - intent: out_of_scope
+  - active_loop: null
+  - action: utter_what_else
+  - intent: be_mean
+  - action: utter_be_nice
+
+- story: context_graphing
+  steps:
+  - intent: ask_about_case_summary_graph
+    entities:
+      - case_type: confirmed
+      - countries:
+        - United States of America
+  - slot_was_set:
+    - case_type: confirmed
+    - countries:
+      - United States of America
+  - action: action_case_summary_graph
+  - slot_was_set:
+    - action_performed: True
+  - intent: inform_countries
+    entities:
+      - countries:
+        - China
+  - slot_was_set:
+    - countries:
+      - China
+  - action: action_case_summary_graph
+
+- story: user_informs_no_context
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: inform_countries
+    entities:
+      - countries:
+        - Russian Federation
+  - slot_was_set:
+    - countries:
+      - Russian Federation
+  - action: utter_what_action
+
+- story: interactive_story_3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_purpose
+  - action: utter_inform_purpose
+  - intent: ask_about_case_count
+    entities:
+    - case_type: deaths
+    - countries: 
+      - Venezuela
+  - slot_was_set:
+    - countries: 
+      - Venezuela
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: start_over
+  - action: action_reset_bot
+
+
+- story: interactive_story_4
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - action: action_forget_slots
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: ask_about_case_count
+    entities:
+    - case_type: deaths
+    - countries: 
+      - Venezuela
+      - columbia
+  - slot_was_set:
+    - countries: 
+      - Venezuela
+      - columbia
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+
+- story: interactive_story_5
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_summary_graph
+    entities:
+    - countries: 
+      - Argentina
+  - slot_was_set:
+    - countries: 
+      - Argentina
+  # - action: action_case_count
+  - action: action_case_summary_graph
+  - slot_was_set:
+    - action_performed: True
+  - intent: start_over
+  - action: action_reset_bot
+
+- story: interactive_story_6
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_summary_graph
+    entities:
+    - countries: 
+      - Canada
+  - slot_was_set:
+    - countries: 
+      - Canada
+  # - action: action_case_count
+  - action: action_case_summary_graph
+  - slot_was_set:
+    - action_performed: True
+  - intent: start_over
+  - action: action_reset_bot
+
+- story: interactive_story_7
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: ask_about_case_count_by_time_month
+    entities:
+    - case_type: deaths
+    - countries: 
+      - mexico
+    - bytime: month
+  - slot_was_set:
+    - case_type: deaths
+    - countries: 
+      - mexico
+    - bytime: month
+  - action: action_case_count_by_time_month
+
+- story: interactive_story_8
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - action: action_forget_slots
+  - intent: ask_about_case_count_by_time_month
+    entities:
+    - case_type: deaths
+    - bytime: month
+  - slot_was_set:
+    - case_type: deaths 
+    - bytime: month
+  - action: action_case_count_by_time_month
+
+- story: interactive_story_9
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: positive_statement
+  - action: utter_how_can_i_help
+  - action: action_forget_slots
+  - intent: be_mean
+  - action: utter_be_nice
+  - intent: ask_about_case_count_by_time_day
+    entities:
+    - case_type: deaths
+    - countries: 
+      - china
+    - bytime: day
+    - bysubtime: october
+  - slot_was_set:
+    - case_type: deaths
+    - countries: 
+      - china
+    - bytime: day
+    - bysubtime: october
+  - action: action_case_count_by_time_day
+
+- story: interactive_story_10
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_count_by_time_day
+    entities:
+    - case_type: deaths
+    - countries: 
+      - russia
+    - bytime: day
+    - bysubtime: march
+  - slot_was_set:
+    - case_type: deaths
+    - countries: 
+      - russia
+    - bytime: day
+    - bysubtime: march
+  - action: action_case_count_by_time_day
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_forget_slots
+  - intent: ask_about_case_summary_graph
+    entities:
+    - country: Argentina
+  - action: action_case_summary_graph
+  - slot_was_set:
+    - action_performed: True
+
+- story: interactive_story_11
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- story: interactive_story_12
+  steps:
+  - intent: how_are_you
+  - action: utter_mood_good
+  - intent: ask_about_case_count
+    entities:
+    - case_type: deaths
+    - countries: 
+      - china
+      - india
+  - slot_was_set:
+    - countries: 
+      - china
+      - india
+  - action: case_count_form
+  - active_loop: case_count_form
+  - active_loop: null
+  - action: action_case_count
+  - intent: start_over
+  - action: action_reset_bot
+
+- story: interactive_story_13
+  steps:
+  - intent: ask_purpose
+  - action: utter_inform_purpose
+  - intent: ask_about_case_count
+    entities:
+    - case_type: deaths
+    - countries: the us
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - the us
+  - action: case_count_form
+  - action: action_case_count
+
+- story: interactive_story_14
+  steps:
+  - intent: ask_about_case_count
+    entities:
+    - scope: new
+    - case_type: confirmed
+    - countries: murica
+  - slot_was_set:
+    - case_type: confirmed
+  - slot_was_set:
+    - countries:
+      - murica
+  - slot_was_set:
+    - scope: new
+  - action: case_count_form
+  - action: action_case_count
+
+- story: interactive_story_15
+  steps:
+  - intent: ask_about_case_count
+    entities:
+    - scope: new
+    - case_type: deaths
+    - countries: u.s.a.
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - u.s.a.
+  - slot_was_set:
+    - scope: new
+  - action: case_count_form
+  - action: action_case_count
+
+- story: interactive_story_16
+  steps:
+  - intent: ask_about_case_count
+    entities:
+    - scope: total
+    - case_type: recoveries
+    - countries: murica
+  - slot_was_set:
+    - case_type: recoveries
+  - slot_was_set:
+    - countries:
+      - murica
+  - slot_was_set:
+    - scope: total
+  - action: case_count_form
+  - action: action_case_count
+
+- story: interactive_story_17
+  steps:
+  - intent: ask_about_case_count_by_time_month
+    entities:
+    - case_type: deaths
+    - bytime: month
+    - countries: "'murica"
+  - slot_was_set:
+    - bytime: month
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - "'murica"
+  - action: action_case_count_by_time_month
+
+- story: interactive_story_18
+  steps:
+  - intent: ask_about_case_count_by_time_day
+    entities:
+    - case_type: deaths
+    - countries: the vatican
+    - bytime: day
+    - bysubtime: october
+  - slot_was_set:
+    - bysubtime: october
+  - slot_was_set:
+    - bytime: day
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - the vatican
+  - action: action_case_count_by_time_day
+
+- story: interactive_story_19
+  steps:
+  - intent: ask_about_case_count_by_time_month
+    entities:
+    - case_type: deaths
+    - countries: pope house
+    - bytime: month
+  - slot_was_set:
+    - bytime: month
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - pope house
+  - action: action_case_count_by_time_month
+
+- story: interactive_story_20
+  steps:
+  - intent: ask_about_case_count_by_time_day
+    entities:
+    - case_type: deaths
+    - countries: vatican
+    - bytime: day
+    - bysubtime: january
+  - slot_was_set:
+    - bysubtime: january
+  - slot_was_set:
+    - bytime: day
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - vatican
+  - action: action_case_count_by_time_day
+
+- story: interactive_story_21
+  steps:
+  - intent: ask_about_case_count_by_time_month
+    entities:
+    - case_type: deaths
+    - countries: the uk
+    - bytime: month
+  - slot_was_set:
+    - bytime: month
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - the uk
+  - action: action_case_count_by_time_month
+
+- story: interactive_story_22
+  steps:
+  - intent: ask_about_case_count_by_time_day
+    entities:
+    - scope: new
+    - case_type: recoveries
+    - countries: uk
+    - bytime: day
+    - bysubtime: november
+  - slot_was_set:
+    - bysubtime: november
+  - slot_was_set:
+    - bytime: day
+  - slot_was_set:
+    - case_type: recoveries
+  - slot_was_set:
+    - countries:
+      - uk
+  - slot_was_set:
+    - scope: new
+  - action: action_case_count_by_time_day
+
+- story: interactive_story_23
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - scope: new
+    - case_type: confirmed
+    - countries: the u.k.
+    - bysubtime: july
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: confirmed
+  - slot_was_set:
+    - countries:
+      - the u.k.
+  - slot_was_set:
+    - scope: new
+  - action: action_case_count_since
+
+- story: interactive_story_24
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - scope: new
+    - case_type: deaths
+    - countries: u.k.
+    - bysubtime: november
+  - slot_was_set:
+    - bysubtime: november
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - u.k.
+  - slot_was_set:
+    - scope: new
+  - action: action_case_count_since
+
+- story: interactive_story_25
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - case_type: deaths
+    - countries: antigua
+    - bysubtime: december
+  - slot_was_set:
+    - bysubtime: december
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - antigua
+  - action: action_case_count_since
+
+- story: interactive_story_26
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - case_type: deaths
+    - bysubtime: july
+    - countries: bouvet
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - bouvet
+  - action: action_case_count_since
+
+- story: interactive_story_27
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - scope: total
+    - case_type: deaths
+    - bysubtime: march
+    - countries: trinidad and tobago
+  - slot_was_set:
+    - bysubtime: march
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - trinidad and tobago
+  - slot_was_set:
+    - scope: total
+  - action: action_case_count_since
+
+- story: interactive_story_28
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - case_type: deaths
+    - countries: faroe islands
+    - bysubtime: april
+  - slot_was_set:
+    - bysubtime: april
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - faroe islands
+  - action: action_case_count_since
+
+- story: interactive_story_29
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - case_type: deaths
+    - countries: netherlands
+    - bysubtime: january
+  - slot_was_set:
+    - bysubtime: january
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - netherlands
+  - action: action_case_count_since
+
+- story: interactive_story_30
+  steps:
+  - intent: ask_about_cases_before
+    entities:
+    - case_type: deaths
+    - countries: china
+    - bysubtime: july
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - china
+  - action: action_case_count_before
+
+- story: interactive_story_31
+  steps:
+  - intent: ask_about_cases_since_specific
+    entities:
+    - case_type: deaths
+    - countries: bouvet island
+    - bysubtime: july
+    - byday: fourth
+  - slot_was_set:
+    - byday: fourth
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - bouvet island
+  - action: action_case_count_since_specific
+
+- story: interactive_story_32
+  steps:
+  - intent: ask_about_cases_before_specific
+    entities:
+    - case_type: deaths
+    - countries: wallis and futuna islands
+    - bysubtime: august
+    - byday: twentieth
+  - slot_was_set:
+    - byday: twentieth
+  - slot_was_set:
+    - bysubtime: august
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - wallis and futuna islands
+  - action: action_case_count_before_specific
+
+- story: interactive_story_33
+  steps:
+  - intent: ask_about_cases_since
+    entities:
+    - case_type: deaths
+    - countries: solomon islands
+    - bysubtime: june
+  - slot_was_set:
+    - bysubtime: june
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - solomon islands
+  - action: action_case_count_since
+
+- story: interactive_story_34
+  steps:
+  - intent: ask_about_cases_before
+    entities:
+    - case_type: deaths
+    - countries: cook islands
+    - bysubtime: july
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - cook islands
+  - action: action_case_count_before
+
+- story: interactive_story_35
+  steps:
+  - intent: ask_about_cases_on_day
+    entities:
+    - case_type: deaths
+    - countries: cook islands
+    - bysubtime: july
+  - slot_was_set:
+    - bysubtime: july
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - cook islands
+  - action: action_case_count_on_day
+
+- story: interactive_story_36
+  steps:
+  - intent: ask_about_cases_on_day
+    entities:
+    - case_type: deaths
+    - countries: wallis and futuna islands
+    - bysubtime: august
+    - byday: twentieth
+  - slot_was_set:
+    - byday: twentieth
+  - slot_was_set:
+    - bysubtime: august
+  - slot_was_set:
+    - case_type: deaths
+  - slot_was_set:
+    - countries:
+      - wallis and futuna islands
+  - action: action_case_count_on_day
