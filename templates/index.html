@@ -1,45 +1,35 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-		<title>SCITalk</title>
+{% extends 'base.html' %}
 
-	</head>
-	<body>
-	    <h1 id="title">SCITalk</h1>
-	    <div id="wrapper">
-		<div id="menu">
-		    <p class="welcome">Welcome to the chat!</p>
-		    <div style="clear:both"></div>
-		</div>    
-		<div id="chatbox">
-		    </div>
+{% block content %}
+	<h1 id="title">SCITalk</h1>
+	<div id="wrapper">
+	<div id="menu">
+		<p class="welcome">Welcome to the chat!</p>
+		<div style="clear:both"></div>
+	</div>    
+	<div id="chatbox">
+		</div>
 
-		<form name="message" id="msg-form" action="" method="POST">
-		    <input name="usermsg" type="text" id="usermsg" size="63" />
-		    <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
-		</form>
-	    </div>
+	<form name="message" id="msg-form" action="" method="POST">
+		<input name="usermsg" type="text" id="usermsg" size="63" />
+		<input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+	</form>
+	</div>
 
-	    <!--Feedback-->
-	    <button id="show-feedback" onclick="showFeedback()">Give us feedback!</button>
-	    <div id="feedback" hidden>
+	<!--Feedback-->
+	<button id="show-feedback" onclick="showFeedback()">Give us feedback!</button>
+	<div id="feedback" hidden>
 		<form name="feedback" id="feedback-form" action="" method="POST">
-		    <p>Was the chatbot able to answer your question?</p>
-		    <input type="radio" id="f-yes" name="correct" value="yes">
-		    <label for="f-yes">Yes</label>
-		    <input type="radio" id="f-no" name="correct" value="no" checked>
-		    <label for="f-no">No</label><br>
+			<p>Was the chatbot able to answer your question?</p>
+			<input type="radio" id="f-yes" name="correct" value="yes">
+			<label for="f-yes">Yes</label>
+			<input type="radio" id="f-no" name="correct" value="no" checked>
+			<label for="f-no">No</label><br>
 
-		    <label for="comments">Comments</label>
-		    <textarea id="comments" name="comments" placeholder="Tell us more.." style="height:200px"></textarea>
-		    <p>Your conversation will be saved with your feedback!</p>
-		    <input type="submit" value="Submit">
+			<label for="comments">Comments</label>
+			<textarea id="comments" name="comments" placeholder="Tell us more.." style="height:200px"></textarea>
+			<p>Your conversation will be saved with your feedback!</p>
+			<input type="submit" value="Submit">
 		</form>
-	    </div>
-
-	    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}" ></script>
-	</body>
-</html>
+	</div>
+{% endblock %}
