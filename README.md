@@ -1,3 +1,3 @@
-# chatbot
-chatbot for cs1980 Pitt Fall 2020
+# SCITalk
+Informative Conversational AI developed by Dr.Alikhani's Lab at the University of Pittsburgh
 
